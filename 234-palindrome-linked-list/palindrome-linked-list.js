@@ -1,8 +1,28 @@
 var isPalindrome = function(head) {
-    const arr = [];
-    while(head && head.val !== null) {
-        arr.push(head.val);
-        head = head.next;
+    if (head === null || head.next === null) return true;
+    let slow = head;
+    let fast = head;
+
+    while (fast !== null && fast.next !== null) {
+        slow = slow.next;
+        fast = fast.next.next;
     }
-    return arr.every((e, i) => e === arr[arr.length - i - 1]);
+
+    let prev = null;
+    while (slow !== null) {
+        let temp = slow.next;
+        slow.next = prev;
+        prev = slow;
+        slow = temp;
+    }
+
+    let firstHalf = head;
+    let secondHalf = prev; 
+    while (secondHalf !== null) {
+        if (firstHalf.val !== secondHalf.val) return false;
+        firstHalf = firstHalf.next;
+        secondHalf = secondHalf.next;
+    }
+
+    return true;
 };
