@@ -9,11 +9,11 @@
  * @param {ListNode} head
  * @return {number}
  */
-var getDecimalValue = function(head){
-    let solution = [];
-    while(head){
-        solution.push(head.val);
-        head = head.next;
-    }
-    return (parseInt(solution.join(""),2))
+var getDecimalValue = function(head) {
+  let val = 0;
+  while (head) {
+    val = (val << 1) | head.val;
+    head = head.next;
+  }
+  return val;
 };
